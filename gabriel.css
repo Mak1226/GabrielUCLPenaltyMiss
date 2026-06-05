@@ -1,0 +1,622 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --grass: #2d7a3a;
+  --grass-dark: #256830;
+  --grass-stripe: #31883f;
+  --sky: #1a1a2e;
+  --psg-blue: #004170;
+  --arsenal-red: #ef0107;
+  --white: #ffffff;
+  --gold: #f5c518;
+  --hud-bg: rgba(0, 0, 0, 0.82);
+}
+
+body {
+  background: #0a0a0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: "Barlow Condensed", sans-serif;
+}
+
+.scene {
+  width: 900px;
+  height: 560px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #333;
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.9);
+}
+
+.play-btn {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  z-index: 20;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 16px;
+  border: 2px solid #555;
+  cursor: pointer;
+}
+
+/* --- CROWD --- */
+.crowd {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48%;
+  background: linear-gradient(180deg, #1a1a2e 0%, #2b2b3b 60%, #3a3a4a 100%);
+  overflow: hidden;
+}
+.crowd::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 18px,
+      rgba(255, 255, 255, 0.03) 18px,
+      rgba(255, 255, 255, 0.03) 20px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 10px,
+      rgba(255, 255, 255, 0.02) 10px,
+      rgba(255, 255, 255, 0.02) 12px
+    );
+}
+/* Crowd dots */
+.crowd-dots {
+  position: absolute;
+  inset: 0;
+}
+.crowd-dots span {
+  position: absolute;
+  border-radius: 50%;
+  background: #e8e4d0;
+  opacity: 0.55;
+  animation: sway 3s ease-in-out infinite;
+}
+
+/* --- PITCH --- */
+.pitch {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 57%;
+  background: var(--grass);
+}
+/* Pitch stripes */
+.pitch::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--grass) 0px,
+    var(--grass) 60px,
+    var(--grass-stripe) 60px,
+    var(--grass-stripe) 120px
+  );
+  opacity: 0.6;
+}
+
+/* --- ADVERTISING BOARDS --- */
+.adboards {
+  position: absolute;
+  top: 46%;
+  left: 0;
+  right: 0;
+  height: 38px;
+  display: flex;
+  z-index: 5;
+}
+.adboard {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: white;
+  border-right: 2px solid #111;
+}
+.ad-pepsi {
+  background: #004b93;
+  color: #fff;
+  flex: 1.2;
+}
+.ad-pepsi span {
+  color: #fff;
+}
+.ad-pepsi .dot {
+  color: #ef3340;
+}
+.ad-ps5 {
+  background: #003087;
+  flex: 0.8;
+}
+.ad-ps5 span {
+  letter-spacing: 3px;
+}
+.ad-master {
+  background: #eb001b;
+  flex: 1.1;
+}
+.ad-master span {
+  color: #fff;
+}
+
+/* --- GOAL --- */
+.goal {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 120px;
+  z-index: 3;
+}
+.goal-frame {
+  position: absolute;
+  inset: 0;
+  border: 5px solid white;
+  border-bottom: none;
+}
+.goal-net {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 9px,
+      rgba(255, 255, 255, 0.18) 9px,
+      rgba(255, 255, 255, 0.18) 10px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 9px,
+      rgba(255, 255, 255, 0.18) 9px,
+      rgba(255, 255, 255, 0.18) 10px
+    );
+  border-radius: 0;
+}
+.goal-back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 48, 135, 0.45) 0%,
+    rgba(0, 48, 135, 0.15) 100%
+  );
+}
+/* Goalposts - vertical lines */
+.post-left,
+.post-right,
+.crossbar {
+  position: absolute;
+  background: white;
+}
+.post-left {
+  left: 0;
+  top: 0;
+  bottom: -8px;
+  width: 5px;
+}
+.post-right {
+  right: 0;
+  top: 0;
+  bottom: -8px;
+  width: 5px;
+}
+.crossbar {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+}
+
+/* --- GOALKEEPER --- */
+.keeper {
+  position: absolute;
+  top: 27%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  width: 22px;
+  height: 50px;
+}
+.keeper-body {
+  width: 100%;
+  height: 100%;
+  background: #00a86b;
+  border-radius: 3px 3px 0 0;
+  position: relative;
+}
+.keeper-head {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: #c8956c;
+  border-radius: 50%;
+}
+.keeper-arms {
+  position: absolute;
+  top: 6px;
+  left: -16px;
+  right: -16px;
+  height: 10px;
+  background: #00a86b;
+  border-radius: 4px;
+}
+.keeper-legs {
+  position: absolute;
+  bottom: -22px;
+  left: 2px;
+  display: flex;
+  gap: 4px;
+}
+.keeper-legs span {
+  width: 7px;
+  height: 22px;
+  background: #00a86b;
+  border-radius: 0 0 3px 3px;
+}
+
+/* --- PENALTY TAKER (No. 6) --- */
+.taker {
+  position: absolute;
+  bottom: 20%;
+  left: 60%;
+  z-index: 7;
+}
+.taker-body {
+  width: 24px;
+  height: 52px;
+  background: var(--arsenal-red);
+  border-radius: 3px 3px 0 0;
+  position: relative;
+}
+.taker-head {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px;
+  height: 15px;
+  background: #8b6246;
+  border-radius: 50%;
+}
+.taker-number {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 11px;
+  color: white;
+  letter-spacing: 0;
+}
+.taker-shorts {
+  position: absolute;
+  bottom: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background: white;
+}
+.taker-legs {
+  position: absolute;
+  bottom: -34px;
+  left: 1px;
+  display: flex;
+  gap: 5px;
+}
+.taker-legs span {
+  width: 8px;
+  height: 20px;
+  background: #c8956c;
+  border-radius: 0 0 3px 3px;
+}
+.taker-legs span:nth-child(1) {
+  animation: legA 0.3s ease-in-out infinite alternate;
+  transform-origin: top center;
+}
+.taker-legs span:nth-child(2) {
+  animation: legB 0.3s ease-in-out infinite alternate;
+  transform-origin: top center;
+}
+.taker-socks-l,
+.taker-socks-r {
+  position: absolute;
+  bottom: -34px;
+  width: 8px;
+  height: 10px;
+  background: white;
+}
+.taker-socks-l {
+  left: 1px;
+}
+.taker-socks-r {
+  left: 14px;
+}
+
+/* --- BALL --- */
+.ball {
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle at 38% 35%, #fff 0%, #ddd 60%, #aaa 100%);
+  border-radius: 50%;
+  border: 1.5px solid #bbb;
+  z-index: 6;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* --- HUD (Score overlay) --- */
+.hud {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  background: var(--hud-bg);
+  border: 1px solid #444;
+  padding: 6px 10px;
+  min-width: 200px;
+}
+.hud-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 11px;
+  color: #aaa;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ucl-icon {
+  width: 14px;
+  height: 14px;
+  background: #1a3c6e;
+  border-radius: 50%;
+  border: 2px solid #5b8ed6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+}
+.hud-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.hud-team {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: white;
+  width: 40px;
+}
+.pens {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.pen {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: bold;
+}
+.pen-scored {
+  background: #2ecc40;
+  color: white;
+}
+.pen-missed {
+  background: #ff4136;
+  color: white;
+}
+.pen-pending {
+  background: #333;
+  border: 1px solid #666;
+}
+.hud-score {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 24px;
+  color: var(--gold);
+  margin-left: 4px;
+}
+
+/* --- BEIN SPORTS --- */
+.bein {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  background: var(--hud-bg);
+  border: 1px solid #444;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.bein-logo {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 14px;
+  color: white;
+  letter-spacing: 1px;
+}
+.bein-logo span {
+  color: #e63;
+}
+.live-badge {
+  background: #e63;
+  color: white;
+  font-size: 10px;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
+  padding: 1px 5px;
+  animation: blink 1.2s ease-in-out infinite;
+}
+.channel-num {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 13px;
+  color: #aaa;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+@keyframes sway {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* pitch line markings */
+.penalty-spot {
+  position: absolute;
+  bottom: 30.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  z-index: 4;
+  opacity: 0.8;
+}
+.penalty-arc {
+  position: absolute;
+  bottom: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 60px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 0 0 120px 120px;
+  border-top: none;
+  z-index: 3;
+}
+.goal-line {
+  position: absolute;
+  bottom: 51%;
+  left: 21%;
+  right: 21%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  z-index: 3;
+}
+.six-yard-box {
+  position: absolute;
+  bottom: 44%;
+  left: 38%;
+  right: 38%;
+  height: 18%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top: none;
+  z-index: 3;
+}
+.penalty-box {
+  position: absolute;
+  bottom: 44%;
+  left: 24%;
+  right: 24%;
+  height: 30%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top: none;
+  z-index: 3;
+}
+
+/* Taker runs from starting position up to the ball */
+@keyframes takerRun {
+  0% {
+    bottom: 20%;
+    left: 60%;
+  }
+  100% {
+    bottom: 32%;
+    left: 50%;
+  }
+}
+
+/* Ball shoots towards the goal */
+@keyframes ballShoot {
+  0% {
+    bottom: 32%;
+    left: 50%;
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  100% {
+    bottom: 90%;
+    left: 60%;
+    opacity: 0;
+    transform: translateX(0) scale(0.6);
+  }
+}
+
+/* Keeper dives to his right */
+@keyframes keeperDive {
+  0% {
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg);
+  }
+  100% {
+    left: 58%;
+    transform: translateX(-50%) rotate(90deg);
+  }
+}
+
+/* Trigger animations upon pressing button */
+.scene.play .taker {
+  animation: takerRun 1.8s ease-in forwards;
+}
+.scene.play .ball {
+  animation: ballShoot 1s ease-in 1.8s forwards;
+}
+.scene.play .keeper {
+  animation: keeperDive 0.8s ease-in 1.8s forwards;
+  transform-origin: bottom center;
+}

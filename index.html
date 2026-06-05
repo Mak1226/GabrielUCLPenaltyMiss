@@ -1,0 +1,118 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PSG vs Arsenal — Penalty Shootout</title>
+    <link rel="stylesheet" href="gabriel.css" />
+  </head>
+  <body>
+    <div class="scene">
+      <!-- CROWD -->
+
+      <div class="crowd"><div class="crowd-dots" id="crowdDots"></div></div>
+      <button class="play-btn" onclick="playScene()">⚽</button>
+      <!-- PITCH -->
+
+      <div class="pitch">
+        <div class="goal-line"></div>
+        <div class="penalty-box"></div>
+        <div class="six-yard-box"></div>
+        <div class="penalty-arc"></div>
+        <div class="penalty-spot"></div>
+      </div>
+
+      <!-- ADVERTISING BOARDS -->
+
+      <div class="adboards">
+        <div class="adboard ad-pepsi">
+          <span>P<span class="dot">E</span>PSI</span>
+        </div>
+        <div class="adboard ad-pepsi" style="flex: 0.6"><span>PEPSI</span></div>
+        <div class="adboard ad-ps5"><span>PS5</span></div>
+        <div class="adboard ad-master"><span>mastercard</span></div>
+        <div class="adboard ad-master" style="flex: 0.5">
+          <span>mastercard</span>
+        </div>
+      </div>
+
+      <!-- GOAL -->
+
+      <div class="goal">
+        <div class="goal-back"></div>
+        <div class="goal-net"></div>
+        <div class="goal-frame"></div>
+        <div class="post-left"></div>
+        <div class="post-right"></div>
+        <div class="crossbar"></div>
+      </div>
+
+      <!-- GOALKEEPER -->
+
+      <div class="keeper">
+        <div class="keeper-arms"></div>
+        <div class="keeper-head"></div>
+        <div class="keeper-body"></div>
+        <div class="keeper-legs"><span></span><span></span></div>
+      </div>
+
+      <!-- BALL -->
+
+      <div class="ball"></div>
+
+      <!-- TAKER -->
+
+      <div class="taker">
+        <div class="taker-head"></div>
+        <div class="taker-body">
+          <div class="taker-number">6</div>
+          <div class="taker-shorts"></div>
+        </div>
+        <div class="taker-legs"><span></span><span></span></div>
+        <div class="taker-socks-l"></div>
+        <div class="taker-socks-r"></div>
+      </div>
+
+      <!-- HUD -->
+
+      <div class="hud">
+        <div class="hud-title"><span class="ucl-icon">✦</span> PENALTIES</div>
+        <!-- PSG: scored, scored, missed, scored, scored = 4 -->
+        <div class="hud-row">
+          <div class="hud-team">PSG</div>
+          <div class="pens">
+            <div class="pen pen-scored">✓</div>
+            <div class="pen pen-scored">✓</div>
+            <div class="pen pen-missed">✕</div>
+            <div class="pen pen-scored">✓</div>
+            <div class="pen pen-scored">✓</div>
+          </div>
+          <div class="hud-score">4</div>
+        </div>
+        <!-- ARS: scored, missed, scored, scored, (5th pending) = 3 -->
+        <div class="hud-row">
+          <div class="hud-team" style="color: #ef0107">ARS</div>
+          <div class="pens">
+            <div class="pen pen-scored">✓</div>
+            <div class="pen pen-missed">✕</div>
+            <div class="pen pen-scored">✓</div>
+            <div class="pen pen-scored">✓</div>
+            <div class="pen pen-pending"></div>
+          </div>
+          <div class="hud-score">3</div>
+        </div>
+      </div>
+
+      <!-- BEIN SPORTS -->
+
+      <div class="bein">
+        <div class="bein-logo"><span>be</span>IN SPORTS</div>
+        <div class="channel-num">2</div>
+        <div class="live-badge">LIVE</div>
+      </div>
+    </div>
+
+    <script src="gabriel.js"></script>
+  </body>
+</html>
